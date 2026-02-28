@@ -1,6 +1,6 @@
 import os
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from playwright.sync_api import sync_playwright
 import pandas as pd
 from supabase import create_client, Client
@@ -87,7 +87,7 @@ def scrape_sixt():
                     'Modello': model,
                     'Prezzo al Giorno (€)': day_price,
                     'Prezzo Totale (€)': total_price,
-                    'Data Scraping': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    'Data Scraping': datetime.now(timezone.utc).isoformat()
                 })
             except Exception as e:
                 print(f"Errore nell'estrarre dati da una card: {e}")
